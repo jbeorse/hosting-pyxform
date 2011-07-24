@@ -1,10 +1,16 @@
-$def with (path)
+$def with (error=None, id=None)
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
   <head>
 	<meta charset="UTF-8" />
     <title>Open Data Kit  &raquo; xls2xform</title>
+    <style type="text/css">
+        error {
+            color: red;
+            font-size: 1.5em;
+            }
+    </style>
 	<link rel="stylesheet" type="text/css" media="all" href="http://opendatakit.org/wp-content/themes/odksite2/style.css" />
 	<link href="http://opendatakit.org/wp-content/themes/odksite2/prettify/prettify.css" type="text/css" rel="stylesheet" />
 	<link rel="pingback" href="http://opendatakit.org/xmlrpc.php" />
@@ -67,20 +73,18 @@ $def with (path)
 <ol>
 <li>Please read all the <a href="/static/tutorial.html">instructions</a> and notes before beginning.</li>
 <li>Choose your .xls file and submit it for conversion.</li>
-<form method="POST" enctype="multipart/form-data" action="/upload"><input type="file" name="xlsfile" /><br/><input type="submit" /></form>
-<li>
-$if path:
-    $if path.split('/')[0] == 'error':
-        Error in conversion:
-        $path.split('/')[-1]
-    $else:
-        Conversion Complete
-        <br />
-        <form><input type="button" value="Download xform" onClick="window.location.href='/xform/$path'"></form>
+<form method="POST" enctype="multipart/form-data" action="/"><input type="file" name="xlsfile" /><br/><input type="submit" /></form>
+
+$if error:
+    </ol><br /><error>Conversion Error: $error</error>
+$elif id:
+    </ol>
+    Conversion Complete
+    <br />
+    <form><input type="button" value="Download xform" onClick="window.location.href='/?d=true;id=$id'"></form>
 $else:
-    A download link will appear when the conversion is complete. 
-</li>
-</ol>
+    <li>A download link will appear when the conversion is complete. </li></ol>
+
 <h3><a name="Useful_Notes"></a>Useful Notes</h3>
 
 <ul>
