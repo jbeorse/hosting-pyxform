@@ -3,7 +3,7 @@ from stat import *
 import convert
 
 web.webapi.internalerror = web.debugerror
-web.config.debug=True
+web.config.debug=False
 
 # Download expire time
 exp = 3600 # 1 hour
