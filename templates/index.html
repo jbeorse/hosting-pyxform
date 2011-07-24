@@ -10,6 +10,9 @@ $def with (error=None, id=None)
             color: red;
             font-size: 1.5em;
             }
+        complete {
+            font-size: 1.5em;
+            }
     </style>
 	<link rel="stylesheet" type="text/css" media="all" href="http://opendatakit.org/wp-content/themes/odksite2/style.css" />
 	<link href="http://opendatakit.org/wp-content/themes/odksite2/prettify/prettify.css" type="text/css" rel="stylesheet" />
@@ -76,12 +79,14 @@ $def with (error=None, id=None)
 <form method="POST" enctype="multipart/form-data" action="/"><input type="file" name="xlsfile" /><br/><input type="submit" /></form>
 
 $if error:
-    </ol><br /><error>Conversion Error: $error</error>
+    </ol><br /><error>Conversion Error: $error</error><br />
 $elif id:
     </ol>
-    Conversion Complete
+    <br />
+    <complete>Conversion Complete</complete>
     <br />
     <form><input type="button" value="Download xform" onClick="window.location.href='/?d=true;id=$id'"></form>
+    <br />
 $else:
     <li>A download link will appear when the conversion is complete. </li></ol>
 
