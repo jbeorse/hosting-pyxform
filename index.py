@@ -15,7 +15,7 @@ cgi.maxlen = 50*1024*1024 # 50MB
 exp = 600 # 10 minutes
 
 # Directory to upload xls files to
-upload_dir = 'xls_files'
+upload_dir = 'xls_files/'
 
 # Download directory
 download_dir = 'xforms/'
@@ -42,7 +42,7 @@ class Index:
         elif 'id' in args:
             #If d is defined the user clicked the download link
             if 'd' in args:
-                self.cleanup_download_files()
+                self.cleanup_files(download_dir)
                 dname = download_dir+args.id
                 print "dname = " + dname
                 files = os.listdir(dname)
@@ -86,7 +86,7 @@ class Index:
         fout.close()
         
         #Remove any expired uploads
-        self.cleanup_upload_files()
+        self.cleanup_files(upload_dir)
         
         #Convert the file. Report any errors, or offer the id of the
         #folder to download from
@@ -96,26 +96,19 @@ class Index:
             raise web.seeother('?e='+ str(sys.exc_info()[1]))
         raise web.seeother('/?id=' + download_ID)
     
-    #Iterate through the upload folder and remove any expired folders    
-    def cleanup_upload_files(self):
+    #Iterate through the upload or download folder and remove any expired folders    
+    def cleanup_files(self, dirty_dir):
         dirs = os.listdir(upload_dir)
         for d in dirs:
-            st=os.stat(upload_dir + '/' + d)
+            if not os.path.isdir(d):
+                os.remove(dirty_dir + d)
+        
+            st=os.stat(dirty_dir + d)
             mtime = st[ST_MTIME]
             
             if time.time() - mtime > exp:
-                shutil.rmtree(upload_dir + '/' + d)
-                web.debug('Deleteing: ' + d)
-    
-    def cleanup_download_files(self):
-        dirs = os.listdir(download_dir)
-        for d in dirs:
-            st=os.stat(download_dir + d)
-            mtime = st[ST_MTIME]
-            
-            if time.time() - mtime > exp:
-                shutil.rmtree(download_dir+d)
-                web.debug('Deleteing: ' + download_dir + d)
+                shutil.rmtree(dirty_dir + d)
+
 
 if __name__ == "__main__":
     app.run()
