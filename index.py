@@ -5,14 +5,11 @@ import convert
 web.webapi.internalerror = web.debugerror
 web.config.debug=False
 
-# Download expire time
-exp = 3600 # 1 hour
+# Upload/Download expire time
+exp = 600 # 10 minutes
 
 # Maximum file input size
 cgi.maxlen = 50*1024*1024 # 50MB
-
-# Upload expire time
-exp = 600 # 10 minutes
 
 # Directory to upload xls files to
 upload_dir = 'xls_files/'
@@ -44,9 +41,7 @@ class Index:
             if 'd' in args:
                 self.cleanup_files(download_dir)
                 dname = download_dir+args.id
-                print "dname = " + dname
                 files = os.listdir(dname)
-                print "file = " + files[0]
                 web.header('Content-Disposition', 'attachment; filename='+files[0])
                 f = open(dname+'/'+files[0],'r')
                 return f.read()
@@ -78,10 +73,10 @@ class Index:
         
         #Generate a unique folder to store the uploaded file in    
         ID = str(int(random.random()*1000000000000))
-        os.mkdir(upload_dir+'/'+ID)  
+        os.mkdir(upload_dir+ID)  
         
         #Store the uploaded xls 
-        fout = open(upload_dir +'/'+ID+'/'+filename,'w') 
+        fout = open(upload_dir+ID+'/'+filename,'w') 
         fout.write(args.xlsfile.file.read())
         fout.close()
         
@@ -93,14 +88,14 @@ class Index:
         try:
             download_ID = convert.convert(upload_dir +'/'+ID+'/'+filename)
         except:
-            raise web.seeother('?e='+ str(sys.exc_info()[1]))
+            raise web.seeother('/?e='+ str(sys.exc_info()[1]))
         raise web.seeother('/?id=' + download_ID)
     
     #Iterate through the upload or download folder and remove any expired folders    
     def cleanup_files(self, dirty_dir):
-        dirs = os.listdir(upload_dir)
+        dirs = os.listdir(dirty_dir)
         for d in dirs:
-            if not os.path.isdir(d):
+            if os.path.isfile(dirty_dir+d):
                 os.remove(dirty_dir + d)
         
             st=os.stat(dirty_dir + d)
