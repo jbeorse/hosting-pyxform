@@ -96,7 +96,7 @@ class Index:
         dirs = os.listdir(dirty_dir)
         for d in dirs:
             if os.path.isfile(dirty_dir+d):
-                os.remove(dirty_dir + d)
+                continue
         
             st=os.stat(dirty_dir + d)
             mtime = st[ST_MTIME]
