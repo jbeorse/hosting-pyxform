@@ -58,7 +58,7 @@
     					<div class="post-20 page type-page status-publish hentry" id="post-20">
             		<h2 class="title">XLS2Xform Tutorial</h2>
             		<div class="entry">
-            		    <p>XLS2Xforms is a tool to simplify the creation of forms for ODK Collect. Forms can be design in an excel file according to a simple format and XLS2Xforms will convert it to a valid xform.</p>
+            		    <p>XLS2XForm is a tool to simplify the creation of forms. Forms can be designed with Excel and XLS2XForm will convert it to a XForm that can be used with ODK tools.</p>
             		    <p>This tutorial teaches you to build your forms using excel. Please refer to the <a href="/static/example.xls">example excel file</a> as you read through the tutorial.</p>
 
 <h3>Basic format</h3>
@@ -83,7 +83,7 @@
     </ul>
     <p>There are also question types that use the above types and set a few parameters for you:</p>
     <ul>
-        <li><b>note</b>: A question that requires no response. It is used to write messages in the form without making an actual question.</li>
+        <li><b>note</b>: A question that requires no response. It is used to write messages in the form. For example, you might describe the following section or provide instructions.</li>
         <li><b>phone number</b>: A string reponse the forces the reponse to only use characters valid in a phone number</li>
         <li><b>number of days in last month/year</b>: An integer response that constrains the value between 0-31 or 0 and 365 respectively.</li>
     </ul>
@@ -104,19 +104,19 @@
     <ul>
         <li>The <b>hint</b> column specifies the question's hint, which will appear smaller and less emphasized than the question's label. A common use for the hint column is to describe the question's constraints.</li>
         <li>The <b>bind:constraint</b> column specifies constraints on the responses that can be provided for questions. For a numerical question this will be a numerical constraint, such as "0 <= . and . <= 100". The dot represents the value provided by the user; the example constraint specifies that the question must have a response between 0 and 100. Note that logical operators "and", "or", and "not" are accepted. For a string question, this column's value will be a regular expression, such as "regex(., '^\d*$')". This example could be used to specify valid input for a phone number.</li>
-        <li>The <b>bind:relevant</b> column specifies whether a question shoud be asked or not based on the answer to a previous question. For example, if a medical form has a section about gynecological information, it could have a question that asks the users gender and then only displays the gynecological section if that response is female. To do this, for each question in the gynecological section, the bind:relevant column would contain "${gender}='female'" where gender is the name of the question (not the label) and female is the desired value. Numerical constraints and logical operators can also be used: "${gender}='female' and ${age_in_years}>=15 and ${age_in_years}<=49"</li>
+        <li>The <b>bind:relevant</b> column specifies whether a question shoud be asked or not based on the answer to a previous question. For example, if a medical form has a section about gynecological information, it could have a question that asks the users gender. It would then only display the gynecological section if that response is female. To do this, for each question in the gynecological section, the bind:relevant column would contain "${gender}='female'" where gender is the name of the question (not the label) and female is the desired value. Numerical constraints and logical operators can also be used: "${gender}='female' and ${age_in_years}>=15 and ${age_in_years}<=49"</li>
         <li>The <b>bind:required</b> column specifies whether a response to the question is required. If "true()" then the user cannot advance to the next question without providing a response. If "false()" then the user does not need to provide a response. By default all questions are required.</li>
-        <li>The <b>media:images</b> column specifies an image to attach to the question. Similarly, <b>media:audio</b> specifies an audio file to attach. Note that the media file must be present within the phone's memory. Also note that if the question has a media file it does not necessarily need a label.</li>
+        <li>The <b>media:images</b> column specifies an image to attach to the question. Similarly, <b>media:audio</b> specifies an audio file to attach. Note that the media file must be present within the phone's sdcard in the correct location.</li>
         <li>The <b>translation:&ltlanguage&gt</b> column specifies a translation of the label column into &ltlanguage&gt. A new instance of this column can be created for each translation language. For example, a question with label value "Good Day" might have translation:Spanish value "Buenos Dias" and tranlsation:German value "Guten Tag".</li>
         <li> The <b>translation:images:&ltlangauge&gt</b> column specifies a translation of the media:images column value. This method can be used to translate media:audio as well.</li>
     </ul>
 <h3>Choices Worksheet</h3>
-    <p>The rows of the choices worksheet specify the multiple choice options for the select and select one questions. Every select and select one question must reference a list name specified here. Furthermore, each set of choices is reusable; multiple select questions could reference the same list name. For example, a "yes_no" list with choices "yes" and "no" would likely be used many times.</p>
+    <p>The rows of the choices worksheet specify the multiple choice options for the "select all that apply" and "select one" questions. Every multiple choice question must reference a list name specified here. Furthermore, each set of choices is reusable; multiple questions could reference the same list name. For example, a "yes_no" list with choices "yes" and "no" would likely be used many times.</p>
     <p>The three necessary columns are list name, name, and label.</p>
     <ul>
         <li>The <b>list name</b> column specifies the name of the set of multiple choice responses. For example, set of choices "brown", "blue", "orange", "red" might share the list name "colors". Note that each choice in your set of choices will have the same list name.</li>
-        <li>The <b>name</b> column specifies the internal name for the choice. This value must be unique and not contain any spaces. It may contain numbers and some special characters, but must start with a letter.</li>
-        <li>The <b>label</b> column specifies the text the user sees for choice.</li>
+        <li>The <b>name</b> column specifies the internal name for the choice (much like the name column from the survey worksheet). This value must be unique and not contain any spaces. It may contain numbers and some special characters, but must start with a letter.</li>
+        <li>The <b>label</b> column specifies the text the user sees for the choices.</li>
     </ul>
     <p>The choices worksheet may also use the media and translation columns just as they are used in the survey worksheet.</p>
 
