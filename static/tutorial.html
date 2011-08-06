@@ -58,8 +58,8 @@
     					<div class="post-20 page type-page status-publish hentry" id="post-20">
             		<h2 class="title">XLS2Xform Tutorial</h2>
             		<div class="entry">
-            		    <p>XLS2XForm is a tool to simplify the creation of forms. Forms can be designed with Excel and XLS2XForm will convert it to a XForm that can be used with ODK tools.</p>
-            		    <p>This tutorial teaches you to build your forms using excel. Please refer to the <a href="/static/example.xls">example excel file</a> as you read through the tutorial.</p>
+            		    <p>XLS2XForm is a tool to simplify the creation of forms. Forms can be designed with Excel and XLS2XForm will convert it to an XForm that can be used with ODK tools.</p>
+            		    <p>This tutorial teaches you to build your forms using excel. Please refer to the <a href="/static/xls2xformWidgets.xls">example excel file</a> as you read through the tutorial.</p>
 
 <h3>Basic format</h3>
     <p>Each workbook must have two worksheets: survey and choices.</p> 
@@ -75,7 +75,6 @@
         <li><b>add integer prompt</b>: A whole number response</li>
         <li><b>add decimal prompt</b>: Any number response</li>
         <li><b>add date prompt</b>: A date response</li>
-        <li><b>add </b>: Opens the camera app and captures a photo response</li>
         <li><b>add select multiple prompt </b>: A multiple choice question where multiple answers are allowed. The list name of the set of choices must also be provided. An example of a tag entry for select would be: "select all that apply from colors", where "colors" is a set of choices in the choices from the choices worksheet.</li>
         <li><b>add select one prompt </b>: A multiple choice question where only one answer is allowed. It requires a list name for a set of choices just as select multiple does.</li>
         <li><b>add barcode prompt</b>: Opens a barcode scanning app and captures a barcode response</li>
@@ -121,6 +120,7 @@
         <li>The <b>relevance</b> column specifies whether a question shoud be asked or not based on the answer to a previous question. For example, if a medical form has a section about gynecological information, it could have a question that asks the users gender. It would then only display the gynecological section if that response is female. To do this, for each question in the gynecological section, the relevance column would contain "${gender}='female'" where gender is the name of the question (not the caption) and female is the desired value. Numerical constraints and logical operators can also be used: "${gender}='female' and ${age_in_years}>=15 and ${age_in_years}<=49"</li>
         <li>The <b>required</b> column specifies whether a response to the question is required. If "yes" then the user cannot advance to the next question without providing a response. If "no" then the user does not need to provide a response. By default no questions are required.</li>
         <li>The <b>read only</b> column specifies whether a question should require a user to provide a response. If "yes" then no response is required. By default all questions require responses.
+        <li>The <b>calculation</b> column specifies that this question's response should be calculated rather than asked from the user. The user will never see a question for which this column is defined. For example, if you had a question that asked the user's age you might calculate whether they were eligible for the draft. The value of this column would be as follows: "if(${age} >= '18', 'eligible', 'not eligible')".</li>
         <li>The <b>media:image</b> column specifies an image to attach to the question. Similarly, <b>media:audio</b> specifies an audio file to attach, and <b>media:video</b> specifies a video file to attache. Note that the media file must be present within the phone's sdcard in the correct location or it will not appear in the form.</li>
         <li>The <b>caption:&ltlanguage&gt</b> column specifies a translation of the caption column into &ltlanguage&gt. A new instance of this column can be created for each translation language. For example, a question with caption value "Good Day" might have caption:Spanish value "Buenos Dias" and caption:German value "Guten Tag".</li>
         <li>The <b>hint:&ltlanguage&gt</b> column specifies a translation of th hint column into &ltlanguage&gt and works much the same as caption:&ltlanguage&gt.</li>
