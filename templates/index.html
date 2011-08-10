@@ -78,7 +78,7 @@ $def with (error=None, id=None)
 <li>Design your form following the <a href="http://opendatakit.org/wp-content/uploads/static/tutorial.html">tutorial</a> or using the <a href="http://opendatakit.org/wp-content/uploads/static/sample.xls">Excel sample</a> form.</li>
 <li>Choose your .xls file and submit it for conversion.</li>
 <form method="POST" enctype="multipart/form-data" action="/"><input type="file" name="xlsfile" /><br/><input type="submit" /></form>
-<li>A Download XForm button will appear if the conversion is successful.</li>
+<li>A Download XForm button will appear below if the conversion is successful.</li>
 $if error:
     <error>Conversion Error: $error</error>
 $elif id:
