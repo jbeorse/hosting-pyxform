@@ -65,73 +65,84 @@
     <p>Each workbook must have two worksheets: survey and choices.</p> 
     <ul>
         <li>The survey worksheet contains the structure and most of the content of the form. It contains the full list of questions and information about how they should be presented. Most rows represent a question; the rest of the rows specify control structures such as groups.</li>
-        <li>The choices worksheet is used to specify the options for multiple choice questions. Each row represents a multiple choice option.</li>
+        <li>The choices worksheet is used to specify the options for multiple choice questions. Each row represents a multiple choice option.  Choices with the same list name are considered part of a related set of choices.  This allows a set of choices to be reused in multiple select questions (for example, yes/no choices).</li>
     </ul>
-    <p>Each of these worksheets has a set of necessary columns that must be present for the .xls file to be valid. Additionally, each worksheet has a set of optional columns that allow further control over the behavior of each entry in the form, but are not essential to the specification. Every entry must have values for each necessary column, but any of the optional columns may be left blank from entry to entry. For example, in the survey worksheet, each question must have a name specified, but one question may have a numerical constraint specified while another has an image file and a third may have niether. These columns, necessary or optional, may appear in any order. Optional columns may be left out completely. Any number of rows may be left blank.</p>
+    <p>Each of these worksheets has a set of necessary columns that must be present for the .xls file to be valid. Additionally, each worksheet has a set of optional columns that allow further control over the behavior of each entry in the form, but are not essential to the specification. Every entry must have values for each necessary column, but any of the optional columns may be left blank from entry to entry. For example, in the survey worksheet, each question must have a name specified, but one question may have a numerical constraint specified while another has an image file and a third may have niether. These columns, necessary or optional, may appear in any order. Optional columns may be left out completely. Any number of rows may be left blank.  All .xls file formatting is ignored so that dividing lines, shading, and font formatting can be used to make the specification more readable.
+    <!-- Any lines that start with a blank column can be used to add comments to the .xls file. -->
+    </p>
 <h3>Survey Worksheet</h3>
-    <p>The rows of the survey worksheet specify the structure of the form. Questions will appear in the order they are specified. The various question types correspond to Collect question types:</p>
+    <p>The rows of the survey worksheet specify the structure of the form. Questions will appear in the order they are specified (of course, depending on skip logic). The various question types correspond to ODK Collect question types and begin with the word "add" and end with the word "prompt":</p>
     <ul>
-        <li><b>add text prompt</b>: A string reponse</li>
-        <li><b>add integer prompt</b>: A whole number response</li>
-        <li><b>add decimal prompt</b>: Any number response</li>
-        <li><b>add date prompt</b>: A date response</li>
-        <li><b>add select multiple prompt </b>: A multiple choice question where multiple answers are allowed. The list name of the set of choices must also be provided. An example of a tag entry for select would be: "select all that apply from colors", where "colors" is a set of choices in the choices from the choices worksheet.</li>
+        <li><b>add text prompt</b>: A string reponse.</li>
+        <li><b>add integer prompt</b>: A whole number response.</li>
+        <li><b>add decimal prompt</b>: Any number response.</li>
+        <li><b>add date prompt</b>: A date response.</li>
+        <li><b>add select multiple prompt </b>: A multiple choice question where multiple answers are allowed. The list name of the set of choices must also be provided. An example of a tag entry for select would be: "add select multiple prompt using colors", where "colors" is the "list name" of a set of choices from the choices worksheet.</li>
         <li><b>add select one prompt </b>: A multiple choice question where only one answer is allowed. It requires a list name for a set of choices just as select multiple does.</li>
-        <li><b>add barcode prompt</b>: Opens a barcode scanning app and captures a barcode response</li>
-        <li><b>add location prompt</b>: Enables the phone's gps and caputures a gps location response</li>
-        <li><b>add image prompt</b>: Opens the camera app and captures a photo response</li>
-        <li><b>add audio prompt</b>: Records audio</li>
-        <li><b>add video prompt</b>: Records video</li>
-        <li><b>add note prompt</b>: A read only question, meaning that there is no response required from the user. For example, you might describe the following section or provide instructions.</li>
+        <li><b>add barcode prompt</b>: Opens a barcode scanning app and captures a barcode response.</li>
+        <li><b>add location prompt</b>: Enables the phone's gps and captures a gps location response.</li>
+        <li><b>add image prompt</b>: Opens the camera app and captures a photo or allows one previously taken to be selected from the phone's photo gallery.  It shows a preview of the photo taken or selected.</li>
+        <li><b>add audio prompt</b>: Records audio or allow selection of a previously recorded audio segment.  It also allows the audio file saved to be reviewed.</li>
+        <li><b>add video prompt</b>: Records video or allow selection of a previously recorded video segment.  It also allows the video file saved to be reviewed.</li>
+        <li><b>add acknowledge prompt</b>: A simple message the user must acknowledge by checking a box.  The form will not advance to the next question unless the box is checked.</li>
+        <li><b>add note prompt</b>: A read only question, meaning that there is no response required from the user. For example, you might describe the following series of questions in a longer form or provide instructions.</li>
     </ul>
 
-    <p>There are also question types that load information from the phone without displaying a question to the user:</p>
+    <p>There are also question types that load information from the phone without displaying a question to the user, these begin with the word "get":</p>
     <ul>
-        <li><b>get device id</b>: The device id</li>
-        <li><b>get start time</b>: A time stamp indicating when the survey was started</li>
-        <li><b>get end time</b>: A time stamp indicating when the survey was finished</li>
-        <li><b>get today</b>: The date the survey was taken</li>
-        <li><b>get subscriber id</b>: The subscriber id</li>
-        <li><b>get sim id</b>: The sim id</li>
-        <li><b>get phone number</b>: The device's phone number</li>
+        <li><b>get device id</b>: The device id.</li>
+        <li><b>get start time</b>: A time stamp indicating when the survey was started.</li>
+        <li><b>get end time</b>: A time stamp indicating when the survey was finished.</li>
+        <li><b>get today</b>: The date the survey was taken.</li>
+        <li><b>get subscriber id</b>: The subscriber id.</li>
+        <li><b>get sim id</b>: The sim id.</li>
+        <li><b>get phone number</b>: The device's phone number.</li>
     </ul>
     
-    <p>You can control the title and id of your form with the following commands. They both default to the name of the file:</p>
+    <p>You can control the title and id of your form with the following commands starting with the word "set". They both default to the name of the file if left unspecified:</p>
     <ul>
-    	<li><b>set form title</b>: Set the form title</li>
-    	<li><b>set form id</b>: Set the form id</li>
+    	<li><b>set form title</b>: Set the form title.</li>
+    	<li><b>set form id</b>: Set the form id.</li>
+        <!-- <li><b>set form server</b>: Set the name of the server and port to be used for submitting data from this form.</li>-->
+        <!-- <li><b>set form public-key</b>: Set the public key used to encrypt the form.</li>-->
 	</ul>
 	
-    <p>Questions can also be grouped. To begin a group, under the type column enter "<b>begin group</b>". After all the questions desired are included, under the type column enter "<b>end group</b>". Note that the "begin group" row must have values for all three necessary columns (specified below), but the "end group" row does not. Groups may also be looped/repeated. To make a set of questions loop, enter "<b>begin looped group</b>" instead (and close it similarly).</p>
-	<br />
     <p>The three necessary columns are type, name, and label.</p>
     <ul>
-        <li>The <b>type</b> column specifies the question type. A few examples include "add text prompt", "add integer prompt", and "get today". The type column can also specify the begin and end of groups.</li>
-        <li>The <b>name</b> column specifies the internal name of the question or group. When referring to a question somewhere else in the form, this is the name to use. When viewing completed data from Aggregate, this name will be used. This value must be unique and not contain any spaces. It may contain numbers and some special characters, but must start with a letter.</li>
+        <li>The <b>type</b> column specifies the question type. A few examples include "add text prompt", "add integer prompt", and "get today". The type column can also specify the begin and end of groups (see next paragraph).</li>
+        <li>The <b>name</b> column specifies the internal name of the question or group (its XPATH name in XForm-speak). When referring to a question somewhere else in the form, this is the name to use. When viewing completed data from Aggregate, this name will be used in the database table. This value must be unique and not contain any spaces. It may contain numbers and some special characters, but must start with a letter.</li>
         <li>The <b>caption</b> column specifies the caption text the user sees in the form. For a question this will be the question text. For a group this will be the group label that appears in the breadcrumb trail.</li>
     </ul>
-    <p>The following columns are optional.</p>
+    <br />
+    <p>Questions can also be grouped so that they appear on the same screen in ODK Collect. To begin a group, enter "<b>begin group</b>" in the type column.  To close a group, enter "<b>end group</b>" under the type column.  Note that the "begin group" row must have values for all three necessary columns (specified below), but the "end group" row does not. Groups may also be repeated (that is, looped).  To make a set of questions repeat, enter "<b>begin looped group</b>" and "<b>end looped group</b>" in the type column.</p>
+	<br />
+    <p>The following columns are optional on the survey worksheet.</p>
     <ul>
-        <li>The <b>hint</b> column specifies the question's hint, which will appear smaller and less emphasized than the question's label. A common use for the hint column is to describe the question's constraints.</li>
+        <li>The <b>hint</b> column specifies the question's hint, which will appear smaller and less emphasized than the question's caption. A common use for the hint column is to describe the question's constraints.</li>
         <li>The <b>default</b> column specifies the default answer for the question. For an integer question you might fill in "42". For a select multiple question, include all of the desired choice names (not the captions) seperated by spaces: "red blue green".</li>
-        <li>The <b>appearance</b> column specifies the appearance attribute for the question or group. This is only relevant for multiple choice questions and groups. For multiple choice questions you could enter "quick" for a quick advance widget or "compact" for a spinner widget. See the example xls file for more examples. When used with a group it can take the value "field-list" to indicate that all members of this group should appear on a single screen.</li>
-        <li>The <b>constraint</b> column specifies constraints on the responses that can be provided for questions. For a numerical question this will be a numerical constraint, such as "0 <= . and . <= 100". The dot represents the value provided by the user; the example constraint specifies that the question must have a response between 0 and 100. Note that logical operators "and", "or", and "not" are accepted. For a string question, this column's value will be a regular expression, such as "regex(., '^\d*$')". This example could be used to specify valid input for a phone number.</li>
-        <li>The <b>constraint message</b> column specifies message to be displayed to the user if the constraints are violated.</li>
-        <li>The <b>relevance</b> column specifies whether a question shoud be asked or not based on the answer to a previous question. For example, if a medical form has a section about gynecological information, it could have a question that asks the users gender. It would then only display the gynecological section if that response is female. To do this, for each question in the gynecological section, the relevance column would contain "${gender}='female'" where gender is the name of the question (not the caption) and female is the desired value. Numerical constraints and logical operators can also be used: "${gender}='female' and ${age_in_years}>=15 and ${age_in_years}<=49"</li>
+        <li>The <b>appearance</b> column specifies the appearance attribute for the question or group. This is only relevant for multiple choice questions and groups. For multiple choice questions you could enter "quick" for a quick advance widget or "minimal" for a spinner widget. An auto-complete widget can be used to make a choice selection by typing in a few letters that appear contiguously in the choice name.  The appearance tag for this type of select question is "autocomplete".  An appearance of value "list" is used to have a multiple choice question appear in a table (matrix) format when in a group of questions with identical choices.  The appearance "list-nolabel" is used to suppress the choice labels in the table format.  The first question in this last type of group has the appearance "label" and is used at the top of the columns of choices.  When used with a group, the appearance column can have the value "field-list" to indicate that all members of this group should appear on a single screen. See example.xls for examples of each of these.</li>
+        <li>The <b>constraint</b> column specifies constraints on the responses that can be provided for questions. For a numerical question this will be a numerical constraint, such as "0 <= . and . <= 100". The dot represents the value provided by the user; the example constraint specifies that the question must have a response between 0 and 100. Note that logical operators "and", "or", and "not" are accepted. For a string question, this column's value will be a regular expression, such as "regex(., '^\d*$')" to specify that a valid input must be all numbers.  To constrain the input to 5 digits, the regular expression would be "regex(., '^[0-9]{5}$')".  A more complex regular expression to check for a well-formed email address is "regex(., '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}')" the latter element constraining the part after the "." to be a character string 2 to 4 characters long. </li>
+        <li>The <b>constraint message</b> column specifies message to be displayed to the user if a constraint is violated.</li>
+        <li>The <b>relevance</b> column specifies whether a question shoud be asked or not based on the answer to a previous question. For example, if a medical form has a section about gynecological information, it could have a question that asks the user's gender. It would then only display the gynecological section if that response is "female". To do this, for each question in the gynecological section, the relevance column would contain "${gender}='female'" where "gender" is the name of the question (not the caption) and "female" is the desired value. Numerical constraints and logical operators can also be used: "${gender}='female' and ${age_in_years}>=15 and ${age_in_years}<=49"</li>
         <li>The <b>required</b> column specifies whether a response to the question is required. If "yes" then the user cannot advance to the next question without providing a response. If "no" then the user does not need to provide a response. By default no questions are required.</li>
-        <li>The <b>read only</b> column specifies whether a question should require a user to provide a response. If "yes" then no response is required. By default all questions require responses.
-        <li>The <b>calculation</b> column specifies that this question's response should be calculated rather than asked from the user. The user will never see a question for which this column is defined. For example, if you had a question that asked the user's age you might calculate whether they were eligible for the draft. The value of this column would be as follows: "if(${age} >= '18', 'eligible', 'not eligible')".</li>
-        <li>The <b>media:image</b> column specifies an image to attach to the question. Similarly, <b>media:audio</b> specifies an audio file to attach, and <b>media:video</b> specifies a video file to attache. Note that the media file must be present within the phone's sdcard in the correct location or it will not appear in the form.</li>
-        <li>The <b>caption:&ltlanguage&gt</b> column specifies a translation of the caption column into &ltlanguage&gt. A new instance of this column can be created for each translation language. For example, a question with caption value "Good Day" might have caption:Spanish value "Buenos Dias" and caption:German value "Guten Tag".</li>
-        <li>The <b>hint:&ltlanguage&gt</b> column specifies a translation of th hint column into &ltlanguage&gt and works much the same as caption:&ltlanguage&gt.</li>
-        <li> The <b>media:image:&ltlangauge&gt</b> column specifies a translation of the media:image column value. This method can be used to translate media:audio and media:video as well.</li>
+        <li>The <b>read only</b> specifies that a question does not require the user to provide a response but is merely used to provide the user information or a note.  If "yes" is in this column then no response is required and the caption is used as the message to the user. By default all questions require responses so there is no need to enter "no" in the "read only" column for a question where input is solicited.
+        <li>The <b>calculation</b> column specifies that this question's response should be calculated rather than asked from the user. The user will never see a question for which this column is defined - it is an internal question to compute a new value - it can be displayed to the user as part of a message (see below). For example, if you had a question that asked the user's age you might calculate whether they were eligible for the draft. The value of this column would be as follows: "if(${age} >= '18', 'eligible', 'not eligible')".</li>
+        <li>The <b>media:image</b> column specifies an image to attach to the question. Similarly, <b>media:audio</b> specifies an audio file to attach, and <b>media:video</b> specifies a video file to attache. Note that the media file must be present within the phone's sdcard in the correct location (in the forms directory in a subdirectory with the name "formname-media") or it will not appear in the form.</li>
+        <li>The <b>caption:&ltlanguage&gt</b> column specifies a translation of the caption column into &ltlanguage&gt. A new instance of this column can be created for each translation language. For example, a question with caption value "Good Day" might have "caption:Spanish" value "Buenos Dias" and "caption:German" value "Guten Tag".</li>
+        <li>The <b>hint:&ltlanguage&gt</b> column specifies a translation of the hint column into &ltlanguage&gt and works much the same as caption:&ltlanguage&gt.</li>
+        <li> The <b>media:image:&ltlanguage&gt</b> column specifies a translation of the media:image column value. This method can be used to translate media:audio and media:video as well.</li>
     </ul>
+    <!--
+    <br />
+    <p>A caption or hint can include the value of a previous question by using the "output" directive directly in the caption or hint string.  For example, if a previous question had the name "FirstName" then a later caption can specify "What is &ltoutput ref="${FirstName}"/&gt's age?".  This directive can be used to display internally calculated values as well such as body mass index in the example "Your body mass index is &ltoutput ref="${BMI}/&gt'." and ask additional questions depending on the BMI value by using relevance.  In this case, BMI would have had "(703 * /FormName/weight div (/FormName/height * /FormName/height))" in the calculation column.</p>
+    -->
+    
 <h3>Choices Worksheet</h3>
-    <p>The rows of the choices worksheet specify the multiple choice options for the "select all that apply" and "select one" questions. Every multiple choice question must reference a list name specified here. Furthermore, each set of choices is reusable; multiple questions could reference the same list name. For example, a "yes_no" list with choices "yes" and "no" would likely be used many times.</p>
+    <p>The rows of the choices worksheet specify the multiple choice options for the "add select multiple prompt" and "add select one prompt" questions. Every multiple choice question must reference a list name specified here (after the word "prompt" to get "add select one prompt using yesno", for example). Usefully, each set of choices is reusable; multiple questions can reference the same list name. For example, a "yesno" list name with choices "yes" and "no" is likely to be used many times.</p>
     <p>The three necessary columns are list name, name, and caption.</p>
     <ul>
         <li>The <b>list name</b> column specifies the name of the set of multiple choice responses. For example, set of choices "brown", "blue", "orange", "red" might share the list name "colors". Note that each choice in your set of choices will have the same list name.</li>
-        <li>The <b>name</b> column specifies the internal name for the choice (much like the name column from the survey worksheet). This value must be unique and not contain any spaces. It may contain numbers and some special characters, but must start with a letter.</li>
+        <li>The <b>name</b> column specifies the internal name for the choice (much like the name column from the survey worksheet). This value must be unique and not contain any spaces. It may contain numbers and some special characters, but must start with a letter.  When a choice is made, this name will be the value used for the answer to the question.  For select multiple prompts, multiple values are used.  To access these values in calculations, the "selected" directive is used.  For example, to add a constraint that choices with names "c" and "d" can't both be selected, one would add the constraint "not(selected(., 'c') and selected (., 'd'))" in the constraint column for that question on the survey worksheet.</li>
         <li>The <b>label</b> column specifies the text the user sees for the choices.</li>
     </ul>
     <p>The choices worksheet may also use the media and translation columns just as they are used in the survey worksheet.</p>
