@@ -8,6 +8,6 @@ def convert(upload_path):
     ID = str(int(random.random()*1000000000000))
     download_path = download_dir + ID
     os.mkdir(download_path)
-    path_to_xform = os.path.join(download_path, survey.get_name() + ".xml")
+    path_to_xform = os.path.join(download_path, survey.print_name() + ".xml")
     survey.print_xform_to_file(path_to_xform, False)
     return ID
