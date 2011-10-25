@@ -75,7 +75,7 @@ $def with (error=None, id=None)
 <h3>Using the Application</h3>
 <ol>
 <li>Please read all the instructions and notes before beginning.</li>
-<li>Design your form following the <a href="http://opendatakit.org/wp-content/uploads/static/tutorial.html">tutorial</a> or try the <a href="http://opendatakit.org/wp-content/uploads/static/sample.xls">sample Excel file</a>.</li>
+<li>Design your form using the <a href="http://opendatakit.org/help/form-design/xls2xform/">XLS2XForm form design</a> help or try the <a href="http://opendatakit.org/wp-content/uploads/static/form-design/sample.xls">sample Excel file</a>.</li>
 <li>Choose your .xls file and submit it for conversion.</li>
 <form method="POST" enctype="multipart/form-data" action="/"><input type="file" name="xlsfile" /><br/><input type="submit" /></form>
 <li>A Download XForm button will appear below if the conversion is successful.</li>
@@ -89,7 +89,7 @@ $elif id:
 
 <ul>
 <li>Forms do not have to be uploaded to <a href="http://opendatakit.org/use/aggregate/">Aggregate</a> before they are used. They can be manually added to <a href="http://opendatakit.org/use/collect/">Collect</a>. Simply place them in the /odk/forms folder on your Android device’s SD card.</li>
-<li>For a simpler, more user friendly form designer, try <a href="http://opendatakit.org/use/build/">Build</a>. For more powerful form designers, try <a href="http://xforms.dimagi.com">Vellum</a>, <a href="http://formbuilder.koboproject.org">FormBuilder</a>, or <a href="http://code.google.com/p/purcforms/">PurcForms</a>. We also have <a href="http://code.google.com/p/opendatakit/source/browse?repo=forms">sample forms</a> and <a href="http://code.google.com/p/opendatakit/wiki/XFormDesignGuidelines">design guidelines</a> if you wish to design forms manually.</li>
+<li>For a simpler, more user friendly form designer, try <a href="http://opendatakit.org/use/build/">Build</a>. For more powerful form designers, try <a href="http://xforms.dimagi.com">Vellum</a>, <a href="http://formbuilder.koboproject.org">Kobo</a>, or <a href="http://code.google.com/p/purcforms/">PurcForms</a>. We also have <a href="http://code.google.com/p/opendatakit/source/browse?repo=forms">sample forms</a> and <a href="http://code.google.com/p/opendatakit/wiki/XFormDesignGuidelines">design guidelines</a> if you wish to design forms manually.</li>
 
 </ul>
             		</div>
@@ -106,11 +106,11 @@ $elif id:
   <h2 class="widgettitle">Navigate</h2>
 
   <p><a href="http://opendatakit.org/use/">&laquo; back to Use</a></p>  <ul>  
-  <li class="page_item page-item-20 current_page_item"><a href="http://opendatakit.org/use/build/" title="Build">Build</a></li>
+  <li class="page_item page-item-20"><a href="http://opendatakit.org/use/build/" title="Build">Build</a></li>
 <li class="page_item page-item-8"><a href="http://opendatakit.org/use/collect/" title="Collect">Collect</a></li>
 <li class="page_item page-item-10"><a href="http://opendatakit.org/use/aggregate/" title="Aggregate">Aggregate</a></li>
 <li class="page_item page-item-44"><a href="http://opendatakit.org/use/validate/" title="Validate">Validate</a></li>
-<li class="page_item page-item-44"><a href="http://xls2xform.opendatakit.org/" title="XLS2XForm">XLS2XForm</a></li>
+<li class="page_item page-item-44 current_page_item"><a href="http://xls2xform.opendatakit.org/" title="XLS2XForm">XLS2XForm</a></li>
   </ul>
   </li>
 
@@ -121,47 +121,61 @@ $elif id:
     </div>
 
     <div class="footer clearfix">
-      <a href="/" class="footerLogo">Open Data Kit</a>
-      <dl>
-        <dt><a href="/about/">About</dt>
-
-        <dd>
-          <ul>
-	        <!-- <li><a href="/about/">Overview</a></li> -->
-            <li class="page_item page-item-604"><a href="http://opendatakit.org/about/tools/" title="Tools">Tools</a></li>
-<li class="page_item page-item-27"><a href="http://opendatakit.org/about/deployments/" title="Deployments">Deployments</a></li>
-<li class="page_item page-item-216"><a href="http://opendatakit.org/about/research/" title="Research">Research</a></li>
-<li class="page_item page-item-366"><a href="http://opendatakit.org/about/press/" title="Press">Press</a></li>
-<li class="page_item page-item-388"><a href="http://opendatakit.org/about/team/" title="Team">Team</a></li>
-
-<li class="page_item page-item-159"><a href="http://opendatakit.org/about/contact/" title="Contact">Contact</a></li>
-            <li><a href="/blog/">Blog</a></li>
-          </ul>
-        </dd>
-        <dt><a href="/use/">Use</a></dt>
-        <dd>
-          <ul>
-            <!-- <li><a href="/use/">Overview</a></li> -->
-
-            <li class="page_item page-item-20 current_page_item"><a href="http://opendatakit.org/use/build/" title="Build">Build</a></li>
-<li class="page_item page-item-8"><a href="http://opendatakit.org/use/collect/" title="Collect">Collect</a></li>
-<li class="page_item page-item-10"><a href="http://opendatakit.org/use/aggregate/" title="Aggregate">Aggregate</a></li>
-<li class="page_item page-item-44"><a href="http://opendatakit.org/use/validate/" title="Validate">Validate</a></li><li class="page_item page-item-44"><a href="http://xls2xform.opendatakit.org/" title="XLS2XForm">XLS2XForm</a></li>
-          </ul>
-        </dd>
-        <dt><a href="/participate/">Participate</a></dt>
-        <dd>
-
-          <ul>
-	        <!-- <li><a href="/participate/">Overview</a></li> -->
-            <li><a href="http://code.google.com/p/opendatakit">Code</a></li>
-            <li class="page_item page-item-977"><a href="http://opendatakit.org/participate/donate/" title="Donate">Donate</a></li>
-            <!-- <li><a href="http://change.washington.edu">UW Change</a></li>
-			<li><a href="http://www.openrosa.org/">OpenRosa</a></li> -->
-          </ul>
-        </dd>
-      </dl>
-
-    </div>
+          <a href="/" class="footerLogo">Open Data Kit</a>
+          <dl>
+            <dt><a href="/about/">About</dt>
+            <dd>
+              <ul>
+    	         <li><a href="/about/">Overview</a></li>
+                <li class="page_item page-item-604"><a href="http://opendatakit.org/about/tools/" title="Tools">Tools</a></li>
+    <li class="page_item page-item-27"><a href="http://opendatakit.org/about/deployments/" title="Deployments">Deployments</a></li>
+    <li class="page_item page-item-216"><a href="http://opendatakit.org/about/research/" title="Research">Research</a></li>
+    <li class="page_item page-item-366"><a href="http://opendatakit.org/about/press/" title="Press">Press</a></li>
+    <li class="page_item page-item-388"><a href="http://opendatakit.org/about/team/" title="Team">Team</a></li>
+    <li class="page_item page-item-159"><a href="http://opendatakit.org/about/contact/" title="Contact">Contact</a></li>
+                <li><a href="/blog/">Blog</a></li>
+              </ul>
+            </dd>
+            <dt><a href="/use/">Use</a></dt>
+            <dd>
+              <ul>
+                <li><a href="/use/">Overview</a></li>
+                <li class="page_item page-item-20"><a href="http://opendatakit.org/use/build/" title="Build">Build</a></li>
+    <li class="page_item page-item-8"><a href="http://opendatakit.org/use/collect/" title="Collect">Collect</a></li>
+    <li class="page_item page-item-10"><a href="http://opendatakit.org/use/aggregate/" title="Aggregate">Aggregate</a></li>
+    <li class="page_item page-item-44"><a href="http://opendatakit.org/use/validate/" title="Validate">Validate</a></li>
+    			<li class="page_item current_page_item" ><a href="/use/xls2xform" title="XLS2XForm">XLS2XForm</a></li>
+              </ul>
+            </dd>
+    		<dt><a href="/help/">Help</a></dt>
+            <dd>
+              <ul>
+                <li><a href="/help/">Overview</a></li>
+                <li class="page_item page-item-378"><a href="http://opendatakit.org/help/faq/" title="FAQ">FAQ</a></li>
+    <li class="page_item page-item-814"><a href="http://opendatakit.org/help/form-design/" title="Form Design">Form Design</a>
+    <ul class='children'>
+    	<li class="page_item page-item-1834"><a href="http://opendatakit.org/help/form-design/binding/" title="Binding">Binding</a></li>
+    	<li class="page_item page-item-1832"><a href="http://opendatakit.org/help/form-design/body/" title="Body">Body</a></li>
+    	<li class="page_item page-item-1829"><a href="http://opendatakit.org/help/form-design/itext/" title="iText">iText</a></li>
+    	<li class="page_item page-item-1836"><a href="http://opendatakit.org/help/form-design/examples/" title="Examples">Examples</a></li>
+    	<li class="page_item page-item-1790"><a href="http://opendatakit.org/help/form-design/xls2xform/" title="XLS2XForm">XLS2XForm</a></li>
+    </ul>
+    </li>
+    <li class="page_item page-item-1759"><a href="http://opendatakit.org/help/help-for-hire/" title="Help For Hire">Help For Hire</a></li>
+    <li class="page_item page-item-1751"><a href="http://opendatakit.org/help/training-guides/" title="Training Guides">Training Guides</a></li>
+              </ul>
+            </dd>
+            <dt><a href="/participate/">Participate</a></dt>
+            <dd>
+              <ul>
+    	        <li><a href="/participate/">Overview</a></li>
+    	            <li><a href="http://code.google.com/p/opendatakit">Code</a></li>
+                <li class="page_item page-item-977"><a href="http://opendatakit.org/participate/donate/" title="Donate">Donate</a></li>
+                <!-- <li><a href="http://change.washington.edu">UW Change</a></li>
+    			<li><a href="http://www.openrosa.org/">OpenRosa</a></li>  -->
+              </ul>
+            </dd>
+          </dl>
+        </div>
 	  </body>
 </html>
